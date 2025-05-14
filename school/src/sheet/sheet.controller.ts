@@ -23,7 +23,10 @@ export class SheetController {
   private verifyHmac(signature: string | undefined, payload: string): boolean {
     if (!signature) return false;
     const secret = this.cfg.get<string>('IMWEB_SECRET_KEY', '');
-    const calc = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+    const calc = crypto
+      .createHmac('sha256', secret)
+      .update(payload)
+      .digest('hex');
     return signature === calc;
   }
 
